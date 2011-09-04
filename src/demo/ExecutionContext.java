@@ -1,21 +1,26 @@
 package demo;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ExecutionContext {
-  private final ExecutionContext parent;
-  private final Activation activation;
-  private final Map<String, Object> variables;
+  private final Activation scope;
 
-  public ExecutionContext(final ExecutionContext parent) {
-    this.variables = new HashMap<String, Object>();
-    this.parent = parent;
-    this.activation = new Activation();
-    this.setVariable("arguments", new Arguments());
+  public ExecutionContext() {
+    this(null);
   }
 
-  public void setVariable(final String key, final Object value) {
-    this.variables.put(key, value);
+  public ExecutionContext(final Activation parentScope) {
+    this.scope = new Activation(parentScope);
+    this.scope.set("arguments", new Arguments());
+  }
+
+  public Activation getScope() {
+    return this.scope;
+  }
+
+  public Object get(final String key) {
+    return this.scope.get(key);
+  }
+
+  public void set(final String key, final Object value) {
+    this.scope.set(key, value);
   }
 }
