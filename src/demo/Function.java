@@ -26,4 +26,17 @@ public class Function {
     }
     return this.body.execute(this.context);
   }
+
+  public FunctionArguments getArguments() {
+    return this.arguments;
+  }
+
+  public ExecutionContext getContext() {
+    return this.context;
+  }
+
+  public FunctionBody getBody() {
+    return this.body;
+  }
+
 }
